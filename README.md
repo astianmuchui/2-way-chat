@@ -1,2 +1,0 @@
-# chatApp
-simple chat application

@@ -1,22 +1,15 @@
 <?php
-        $servername = "chat";
-        $serverhost = "localhost";
-        $serverUser = "root";
-        $serverPassword = "";
-        $conn = mysqli_connect($serverhost,$serverUser,$serverPassword,$servername);    
-        function validate($msg){
-        if(empty($msg)){
-            echo '<div style"background: red;padding 10px">Please write a message</div>';
-        }else{
-           
-        }    
-    }
-    $username1 = "User 1";
+    $servername = "chat";
+    $serverhost = "localhost";
+    $serverUser = "root";
+    $serverPassword = "";
+    $conn = mysqli_connect($serverhost,$serverUser,$serverPassword,$servername);   
+    $username2 = "User 2";
     if(isset($_POST['submit'])){
         $msg = $_POST['message'];
         
         if(!empty($msg)){
-            $query = "INSERT INTO sent_messages (username,body) VALUES ('$username1','$msg')";
+            $query = "INSERT INTO received_messages (username,content) VALUES ('$username2','$msg')";
             $act = mysqli_query($conn, $query);
             if($act){
                 
@@ -25,12 +18,11 @@
             }
         }
     }
-    $query = "SELECT * FROM sent_messages";
-    
+    $query = "SELECT * FROM received_messages";
   $result = mysqli_query($conn,$query);
-  $messages = mysqli_fetch_all($result,MYSQLI_ASSOC);
+  $receipts = mysqli_fetch_all($result,MYSQLI_ASSOC);
   mysqli_free_result($result);
-  mysqli_close($conn);  
+  mysqli_close($conn); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,19 +30,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/lib.css">
-    <title>Simple Chat system</title>
+    <link rel="stylesheet" href="./css/min.css ">
+    <title>Recepient side</title>
 </head>
-<body style="background: rgba(0,0,0,0.7);">
-    <div class="container-main">
+<body>
+<div class="container-main">
         <div class="head">
             <h1>Chat</h1>
         </div>
         <div class="content">
-        <?php foreach($messages as $message):?>
-            
-            <div class="message">
+        <?php 
+        require './server/fetch_sent.php';
+        foreach($messages as $message):?>
+            <div class="message_two">
                 <?php echo $message['body']?>
                 <br>
 
@@ -60,14 +52,10 @@
                 ?>
                 <small><?php echo $time?></small>
             </div>
-            
-            <?php endforeach ?>
-            <?php 
-                require "./server/fetch_received.php";?>
-    <?php foreach($receipts as $receipt):?>
-        
+            <?php endforeach?>
+        <?php foreach($receipts as $receipt):?>
         <?php  $gmt = substr($receipt['time'],10,6); ?>
-            <div class="message_two">
+            <div class="message">
                     <?php echo $receipt['content']; ?> <br>
                     <small><?php echo $gmt;?>   </small>
             </div>
@@ -81,6 +69,5 @@
         </div>
 
     </div>
-
 </body>
 </html>

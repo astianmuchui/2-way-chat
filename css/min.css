@@ -16,7 +16,7 @@ body{
     position: relative;
     left: 3%;
     margin-top: 5%;
-    background: #000;
+    background: #00030a;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     backdrop-filter: blur(20px);
     padding: 3;
@@ -43,13 +43,14 @@ body{
     height: 60vh;
     width: 400px;
     overflow: auto;
-}.form-container{
+}
+.form-container{
     background-color: #000;
     height: 8vh;
     display: inline-flex;
 }
 textarea{
-    height: 56px;
+    height: 50px;
     position: relative;
     left: 0px;
     border: 2px solid white;
@@ -71,23 +72,23 @@ input{
     border-radius: 1px;
     border: 1px solid transparent;
 }
-
 .message{
     background-color: white;
     padding: 10px 20px;
-    margin: 20px 0 0 300px;
+    margin: 20px 0 0 280px;
     width: max-content;
     max-width: 300px;
     word-wrap: break-word;
     height: max-content;
     border-radius: 20px;
 }
+
 .message_two{
     background-color: rgb(1, 8, 22);
     padding: 10px 20px;
     margin: 20px 0 0 10px;
     width: max-content;
-    max-width: 300px;
+    max-width: 120px;
     word-wrap: break-word;
     height: max-content;
     border-radius: 20px;
